@@ -30,13 +30,13 @@ Tenemos un montón de tutoriales para que empieces.
      :titlesonly:
      :caption: Instalación
 
-     install/digitalocean
-     install/ovh
-     install/jetstream
-     install/google
-     install/amazon
-     install/azure
-     install/custom-server
+     instalacion/digitalocean
+     instalacion/ovh
+     instalacion/jetstream
+     instalacion/google
+     instalacion/amazon
+     instalacion/azure
+     instalacion/custom-server
 
 Ya que estes lista para correr tu servidor es buena
 idea proceder directamente a :doc:`como/admin/https`.
