@@ -74,9 +74,9 @@ def format_td(td):
         return td
     seconds = int(td.total_seconds())
     h = seconds // 3600
-    seconds = seconds % 3600
+    seconds %= 3600
     m = seconds // 60
-    seconds = seconds % 60
+    seconds %= 60
     return f"{h:02}:{m:02}:{seconds:02}"
 
 
