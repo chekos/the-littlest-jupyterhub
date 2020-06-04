@@ -220,13 +220,11 @@ def set_cull_idle_service(config):
     if cull_config['users']:
         cull_cmd += ['--cull-users']
 
-    cull_service = {
+    return {
         'name': 'cull-idle',
         'admin': True,
         'command': cull_cmd,
     }
-
-    return cull_service
 
 
 def update_services(c, config):

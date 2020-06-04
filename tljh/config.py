@@ -124,7 +124,7 @@ def add_item_to_config(config, property_path, value):
         else:
             # If we are asked to create new non-leaf nodes, we will always make them dicts
             # This means setting is *destructive* - will replace whatever is down there!
-            if cur_path not in cur_part or not _is_dict(cur_part[cur_path]):
+            if not (cur_path in cur_part and _is_dict(cur_part[cur_path])):
                 cur_part[cur_path] = {}
             cur_part = cur_part[cur_path]
 
@@ -147,7 +147,7 @@ def remove_item_from_config(config, property_path, value):
             cur_part = cur_part[cur_path]
             cur_part.remove(value)
         else:
-            if cur_path not in cur_part or not _is_dict(cur_part[cur_path]):
+            if not (cur_path in cur_part and _is_dict(cur_part[cur_path])):
                 raise ValueError(f'{property_path} does not exist in config!')
             cur_part = cur_part[cur_path]
 

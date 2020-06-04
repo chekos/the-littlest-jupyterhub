@@ -104,21 +104,24 @@ def remove_chp():
     """
     Ensure CHP is not running
     """
-    if os.path.exists("/etc/systemd/system/configurable-http-proxy.service"):
-        if systemd.check_service_active('configurable-http-proxy.service'):
-            try:
-                systemd.stop_service('configurable-http-proxy.service')
-            except subprocess.CalledProcessError:
-                logger.info("Cannot stop configurable-http-proxy...")
-        if systemd.check_service_enabled('configurable-http-proxy.service'):
-            try:
-                systemd.disable_service('configurable-http-proxy.service')
-            except subprocess.CalledProcessError:
-                logger.info("Cannot disable configurable-http-proxy...")
+    if not os.path.exists(
+        "/etc/systemd/system/configurable-http-proxy.service"
+    ):
+        return
+    if systemd.check_service_active('configurable-http-proxy.service'):
         try:
-            systemd.uninstall_unit('configurable-http-proxy.service')
+            systemd.stop_service('configurable-http-proxy.service')
         except subprocess.CalledProcessError:
-            logger.info("Cannot uninstall configurable-http-proxy...")
+            logger.info("Cannot stop configurable-http-proxy...")
+    if systemd.check_service_enabled('configurable-http-proxy.service'):
+        try:
+            systemd.disable_service('configurable-http-proxy.service')
+        except subprocess.CalledProcessError:
+            logger.info("Cannot disable configurable-http-proxy...")
+    try:
+        systemd.uninstall_unit('configurable-http-proxy.service')
+    except subprocess.CalledProcessError:
+        logger.info("Cannot uninstall configurable-http-proxy...")
 
 
 def ensure_jupyterhub_service(prefix):

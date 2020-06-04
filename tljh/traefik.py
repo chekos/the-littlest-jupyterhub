@@ -95,7 +95,7 @@ def ensure_traefik_config(state_dir):
     tls = https["tls"]
     # validate https config
     if https["enabled"]:
-        if not tls["cert"] and not letsencrypt["email"]:
+        if not (tls["cert"] or letsencrypt["email"]):
             raise ValueError(
                 "To enable https, you must set tls.cert+key or letsencrypt.email+domains"
             )
